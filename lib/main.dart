@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/data/question.dart';
-import 'package:quiz_app/quiz.dart';
-import 'package:quiz_app/desingPattern/controller/online_question_controller.dart';
+import 'package:provider/provider.dart';
+import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_question_provider.dart';
 
-OnlineQuestionController controller = OnlineQuestionController();
+import 'package:quiz_app/quiz.dart';
 
 void main() {
-  runApp(const Quiz());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => OnlineQuestionProvider()..fetchQuestions(),
+      child: const Quiz(),
+    ),
+  );
 }

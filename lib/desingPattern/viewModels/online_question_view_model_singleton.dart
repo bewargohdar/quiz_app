@@ -2,15 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:quiz_app/Api/api_url.dart';
 import 'package:quiz_app/desingPattern/models/online_question_model.dart';
 
-class OnlineQuestionController {
-  static final OnlineQuestionController _instancee =
-      OnlineQuestionController._internal();
+class OnlineQuestionViewModel {
+  //use  signleton pattern
+  static final OnlineQuestionViewModel _instance =
+      OnlineQuestionViewModel._internal();
 
-  OnlineQuestionController._internal();
-
-  factory OnlineQuestionController() {
-    return _instancee;
+  factory OnlineQuestionViewModel() {
+    return _instance;
   }
+
+  OnlineQuestionViewModel._internal();
 
   Future<List<OnlineQuestion>> getQuestions() async {
     List<OnlineQuestion> questions = [];

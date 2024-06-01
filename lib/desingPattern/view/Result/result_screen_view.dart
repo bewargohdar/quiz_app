@@ -1,35 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/data/question.dart';
+import 'package:quiz_app/desingPattern/models/online_question_model.dart';
 import 'package:quiz_app/desingPattern/view/QuestionSummery/question_summery_screen.dart';
+import 'package:quiz_app/desingPattern/viewModels/result_screen_view_model.dart';
 
-class ResultScreen extends StatefulWidget {
-  const ResultScreen({super.key, required this.chosenAnswer});
+class ResultScreen extends StatelessWidget {
   final List<String> chosenAnswer;
+  final List<OnlineQuestion> question;
 
-  @override
-  State<ResultScreen> createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
-  List<Map<String, Object>> summaryData() {
-    final List<Map<String, Object>> summary = [];
-    print(questions[0].text);
-    for (var i = 0; i < 6; i++) {
-      summary.add({
-        'question': questions[i].text,
-      });
-    }
-
-    return summary;
-  }
+  const ResultScreen(
+      {Key? key, required this.chosenAnswer, required this.question})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final summryData = summaryData();
-    final numOfTotalQuestion = questions.length;
-    final numOfCorrectQuestion = summryData.where((data) {
-      return data['user_answer'] == data['correct_answer'];
-    }).length;
+    final viewModel =
+        ResultScreenViewModel(questions: question, chosenAnswers: chosenAnswer);
+    final summaryData = viewModel.summaryData();
+    final numOfTotalQuestion = question.length;
+    final numOfCorrectQuestion =
+        viewModel.getNumOfCorrectQuestions(summaryData);
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -55,13 +45,10 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            QuestionSummaryScreen(summaryData: summryData),
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30),
+            SingleChildScrollView(
+                child: QuestionSummaryScreen(summaryData: summaryData)),
+            SizedBox(height: 30),
             TextButton(onPressed: () {}, child: Text('restart quiz'))
           ],
         ),

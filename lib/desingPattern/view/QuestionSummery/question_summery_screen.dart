@@ -32,8 +32,20 @@ class QuestionSummaryScreen extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(data['user_answer'] as String),
-                      Text(data['correct_answer'] as String),
+                      Text(
+                        data['user_answer'] as String,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        data['correct_answer'] as String,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 4, 212, 18),
+                          fontSize: 16,
+                        ),
+                      ),
                     ],
                   ),
                 )

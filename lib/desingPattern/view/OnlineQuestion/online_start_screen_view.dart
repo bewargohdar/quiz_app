@@ -44,23 +44,6 @@ class OnlineStartScreen extends StatelessWidget {
                       fontSize: 20, color: Colors.white, fontFamily: 'Roboto')),
             ),
           ),
-          // const SizedBox(
-          //   height: 50,
-          // ),
-          // OutlinedButton.icon(
-          //   onPressed: () {},
-          //   style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-          //   icon: const Icon(
-          //     Icons.arrow_right_alt,
-          //   ),
-          //   label: const Text(
-          //     'Start Quiz',
-          //     style: TextStyle(
-          //       fontSize: 20,
-          //       color: Colors.white,
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

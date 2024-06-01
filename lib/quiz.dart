@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/data/question.dart';
-
+import 'package:provider/provider.dart';
+import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_question_provider.dart';
 import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_question_screen.dart';
 import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_start_screen_view.dart';
 import 'package:quiz_app/desingPattern/view/Result/result_screen_view.dart';
@@ -25,11 +25,13 @@ class _QuizState extends State<Quiz> {
   Future<void> chooseAnswer(String answer) async {
     selectedAnswers.add(answer);
 
-    if (selectedAnswers.length == questions.length) {
+    if (selectedAnswers.length ==
+        context.read<OnlineQuestionProvider>().questions.length) {
       setState(() {
-        selectedAnswers = [];
         activeScreen = 'result_screen';
       });
+    } else {
+      setState(() {}); // Move to the next question
     }
   }
 
@@ -38,12 +40,14 @@ class _QuizState extends State<Quiz> {
     Widget screenWidget = activeScreen == 'start_screen'
         ? OnlineStartScreen(switchScreen)
         : OnlineQuestionScreen(onSelectorAnswer: chooseAnswer);
+
     if (activeScreen == 'result_screen') {
       screenWidget = ResultScreen(
         chosenAnswer: selectedAnswers,
+        question: context.read<OnlineQuestionProvider>().questions,
       );
     }
-    print(selectedAnswers);
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
