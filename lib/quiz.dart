@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/question.dart';
-import 'package:quiz_app/question_screen.dart';
-import 'package:quiz_app/result_screen.dart';
-import 'package:quiz_app/start_screen.dart';
+
+import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_question_screen.dart';
+import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_start_screen_view.dart';
+import 'package:quiz_app/desingPattern/view/Result/result_screen_view.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -21,10 +22,12 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-  void chooseAnswer(String answer) {
+  Future<void> chooseAnswer(String answer) async {
     selectedAnswers.add(answer);
+
     if (selectedAnswers.length == questions.length) {
       setState(() {
+        selectedAnswers = [];
         activeScreen = 'result_screen';
       });
     }
@@ -33,13 +36,14 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = activeScreen == 'start_screen'
-        ? StartScreen(switchScreen)
-        : QuestionScreen(onSelectorAnswer: chooseAnswer);
+        ? OnlineStartScreen(switchScreen)
+        : OnlineQuestionScreen(onSelectorAnswer: chooseAnswer);
     if (activeScreen == 'result_screen') {
       screenWidget = ResultScreen(
         chosenAnswer: selectedAnswers,
       );
     }
+    print(selectedAnswers);
     return MaterialApp(
       home: Scaffold(
         body: Container(

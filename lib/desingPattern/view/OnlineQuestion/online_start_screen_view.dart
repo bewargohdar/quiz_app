@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class StartScreen extends StatelessWidget {
-  const StartScreen(this.startQuiz, {super.key});
+class OnlineStartScreen extends StatelessWidget {
+  const OnlineStartScreen(this.startQuiz, {super.key});
   final void Function() startQuiz;
 
   @override

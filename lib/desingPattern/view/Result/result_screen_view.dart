@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/question.dart';
-import 'package:quiz_app/question_summary.dart';
+import 'package:quiz_app/desingPattern/view/QuestionSummery/question_summery_screen.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends StatefulWidget {
   const ResultScreen({super.key, required this.chosenAnswer});
   final List<String> chosenAnswer;
+
+  @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
   List<Map<String, Object>> summaryData() {
     final List<Map<String, Object>> summary = [];
-    for (var i = 0; i < chosenAnswer.length; i++) {
+    print(questions[0].text);
+    for (var i = 0; i < 6; i++) {
       summary.add({
-        'question_index': i,
         'question': questions[i].text,
-        'correct_answer': questions[i].answers[0],
-        'user_answer': chosenAnswer[i],
       });
     }
+
     return summary;
   }
 
@@ -32,13 +37,28 @@ class ResultScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              ' Your answer $numOfCorrectQuestion out of $numOfTotalQuestion question correct',
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  ' Your answer $numOfCorrectQuestion out of $numOfTotalQuestion question correct',
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 158, 38, 167),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: "Roboto",
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 30,
             ),
-            QuestionSummary(summaryData: summryData),
+            QuestionSummaryScreen(summaryData: summryData),
             SizedBox(
               height: 30,
             ),
