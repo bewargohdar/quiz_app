@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/desingPattern/controller/online_question_controller.dart';
-import 'package:quiz_app/desingPattern/models/online_question_singleton_model.dart';
+import 'package:quiz_app/desingPattern/models/online_question_model.dart';
 import 'package:quiz_app/desingPattern/view/OnlineQuestion/online_question_answers_view.dart';
 
 class OnlineQuestionScreen extends StatefulWidget {

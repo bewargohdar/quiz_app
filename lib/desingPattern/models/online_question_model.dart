@@ -6,13 +6,14 @@ class OnlineQuestion {
   String? correctAnswer;
   List<String>? incorrectAnswers;
 
-  static final OnlineQuestion _instance = OnlineQuestion._internal();
-
-  factory OnlineQuestion() {
-    return _instance;
-  }
-
-  OnlineQuestion._internal();
+  OnlineQuestion({
+    this.type,
+    this.difficulty,
+    this.category,
+    this.question,
+    this.correctAnswer,
+    this.incorrectAnswers,
+  });
 
   OnlineQuestion.fromJson(Map<String, dynamic> json) {
     type = json['type'];
